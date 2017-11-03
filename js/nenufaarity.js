@@ -21,4 +21,9 @@ $(window).load(function(){
 		document.getElementById('scroll-bar').style.width = percent + '%';
 	
 	});
+	window.onclick = function(event) {
+		if (event.target == document.getElementById('user_agreement')) {
+		  document.getElementById('user_agreement').style.display = "none";
+		}
+	};
 });

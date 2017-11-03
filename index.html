@@ -205,14 +205,30 @@
 <!-- Container (Portfolio Section) -->
 <div class="w3-container w3-padding-64 w3-center">
 	<div class="w3-half w3-container">
-		<br/><a href="downloads/full/nenufaarity.tar.gz" class="w3-hover-opacity" ><span class="w3-badge w3-jumbo w3-blue w3-display-container" style="width:150px;height:150px;"><i class="fa fa-download w3-jumbo w3-display-middle"></i></span></a><br/>
+		<br/><span onclick="document.getElementById('user_agreement_checkbox').checked=false;document.getElementById('download_link').value='downloads/full/nenufaarity.tar.gz';document.getElementById('user_agreement').style.display='block';" class="w3-hover-opacity"><span class="w3-badge w3-jumbo w3-blue w3-display-container" style="width:150px;height:150px;"><i class="fa fa-download w3-jumbo w3-display-middle"></i></span></span><br/>
 		<p class="w3-large w3-center w3-padding-32">Download the full archive with reference data (snp, genome...)<br/>14.4 Gb</p><p class="w3-center"</p>MD5 checksum: 6ca0f2219b2f1ad33a14affdbb33785f</p><br/><br/>
 	</div>
 	<div class="w3-half w3-container">
-		<br/><a href="downloads/empty/nenufaarity.tar.gz" class="w3-hover-opacity" ><span class="w3-badge w3-jumbo w3-teal w3-display-container" style="width:150px;height:150px;"><i class="fa fa-download w3-jumbo w3-display-middle"></i></span></a><br/>
+		<br/><span onclick="document.getElementById('user_agreement_checkbox').checked=false;document.getElementById('download_link').value='downloads/empty/nenufaarity.tar.gz';document.getElementById('user_agreement').style.display='block';" class="w3-hover-opacity"><span class="w3-badge w3-jumbo w3-teal w3-display-container" style="width:150px;height:150px;"><i class="fa fa-download w3-jumbo w3-display-middle"></i></span></span><br/>
 		<p class="w3-large w3-center w3-padding-32">Download the empty archive (you will have to add reference data <a href="documentation.html#h3_add" target="_blank">manually</a>)<br/>700 Mb</p><p class="w3-center"</p>MD5 checksum: 9361f5e3f832a5171d1f05b8d9821db3</p><br/>
 	</div>
 </div>
+
+<!--Modal-->
+<div class="w3-modal" id="user_agreement">
+	<div class="w3-modal-content w3-animate-opacity">
+		<header class="w3-container w3-teal"> 
+			<span onclick="document.getElementById('user_agreement').style.display='none'" 
+			class="w3-button w3-display-topright w3-xlarge">&times;</span>
+			<h2>User agreement</h2>
+		</header>
+		<div class="w3-container">
+			<p>Please confirm that you are an academic non-commercial user:</p>
+			<p><input type="hidden" id="download_link" value="downloads/full/nenufaarity.tar.gz"/><input id="user_agreement_checkbox" type="checkbox" onclick="if (this.checked){var link = document.getElementById('download_link').value;window.open(link);}"/> I am an academic non-commercial user.</p>
+		</div>
+	</div>
+</div>
+
 
 <div class="bgimg-3 w3-display-container w3-opacity-min" id="team">
   <div class="w3-display-middle">
@@ -225,46 +241,19 @@
   </div>
 </div>
 
-<!--<div class="w3-content w3-container w3-padding-64">-->
-<!--	<div class="w3-col" style="position: relative;">-->
-<!--		<div class="w3-col s4 w3-container w3-padding-64" style="position: absolute;height:100%">-->
-<!--			<a href="https://neuro-2.iurc.montp.inserm.fr" title="go to MoBiDiC page" target="_blank" class="w3-hover-opacity" style="text-decoration: none;">-->
-<!--				<img src="img/mobi2.png" alt="MoBiDiC" class="w3-display-middle"/>-->
-<!--			</a>-->
-<!--		</div>-->
-<!--		<div class="w3-col s4 w3-container"><!-- </div>
-<!--		<div class="w3-col s8 w3-container w3-padding-64">-->
-<!--			<h3 class="w3-center"><a href="https://neuro-2.iurc.montp.inserm.fr" title="go to MoBiDiC page" target="_blank">The MoBiDiC team</a></h3>-->
-<!--			<p class="w3-center"><!--<em><b>Mo</b>ntpellier <b>Bi</b>oinformatics in <b>Di</b>agnostic <b>C</b>linic</em>--><!--Bioinformatics at <a href ="http://www.chu-montpellier.fr/" target="_blank" title="Visit the hospital page">Montpellier University Hospital</a><a href="https://github.com/mobidic" title="go to MoBiDiC git page" target="_blank" class="w3-hover-text-black w3-large" style="text-decoration: none;">-->
-<!--					<i class="fa fa-github fa-fw"></i>-->
-<!--				</a></p>-->
-<!--			<!-- <p class="w3-large w3-margin-bottom">The  :</p> -->
-<!--			<div class="w3-col w3-center w3-large w3-margin-bottom">-->
-<!--				Nenufaarity: David BAUX<a href="https://github.com/beboche" title="go to David's GitHub page" target="_blank" class="w3-hover-text-black" style="text-decoration: none;">-->
-<!--					<i class="fa fa-github fa-fw"></i>-->
-<!--				</a><br>-->
-<!--				Web Design: Charles VAN GOETHEM<a href="https://github.com/char-al" title="go to Charles' GitHub page" target="_blank" class="w3-hover-text-black" style="text-decoration: none;">-->
-<!--					<i class="fa fa-github fa-fw"></i>-->
-<!--				</a><br>-->
-<!--			</div>-->
-<!--		</div>-->
-<!--	</div>-->
-<!--</div>-->
 
+<!--last Container-->
 <div>
 	<table style="border:none;width:100%;" class="w3-padding-64">
 		<tr style="width:100%;">
 			<td style="width:50%;" class="w3-center w3-padding-64">
 				<a href="https://neuro-2.iurc.montp.inserm.fr/mobidic/" title="Visit MoBiDiC's page" target="_blank" class="w3-hover-opacity" style="text-decoration: none;"><img src="img/mobi2.png" alt="MoBiDiC"/></a>
 			</td>
-			<!--<div class="w3-col s4 w3-container"></div>-->
 			<td style="width:50%;" class="w3-center w3-padding-64">
 				<h3 class="w3-center"><a href="https://neuro-2.iurc.montp.inserm.fr/mobidic/" title="Visit MoBiDiC's page" target="_blank">The MoBiDiC team</a></h3>
 				<p class="w3-center">Bioinformatics at <a href ="http://www.chu-montpellier.fr/" target="_blank" title="Visit the hospital page">Montpellier University Hospital</a><a href="https://github.com/mobidic" title="Visit MoBiDiC's GitHub page" target="_blank" class="w3-hover-text-black w3-large" style="text-decoration: none;">
 						<i class="fa fa-github fa-fw"></i>
 					</a></p>
-				<!-- <p class="w3-large w3-margin-bottom">The  :</p> -->
-				<!--<div class="w3-col w3-center w3-large w3-margin-bottom">-->
 				<p>
 					Nenufaarity: David BAUX<a href="https://github.com/beboche" title="Visit David's GitHub page" target="_blank" class="w3-hover-text-black" style="text-decoration: none;">
 						<i class="fa fa-github fa-fw"></i>
@@ -277,6 +266,8 @@
 		</tr>
 	</table>
 </div>
+
+<!--footer-->
 
 <footer class="w3-bottom w3-hide-small">
 	<div class="w3-white w3-opacity-min w3-row">
@@ -294,32 +285,5 @@
 		<div class="w3-container w3-quarter w3-right-align"><a href ="http://www.chu-montpellier.fr/" target="_blank" title="visit the Montpellier University Hospital Website"><img src="img/CHU_300_transparent.png" class="w3-padding" style="height:50px"/></a></div>
 	</div>
 </footer>
-
-<!-- Add Google Maps -->
-<!--<script>-->
-<!---->
-<!--// Used to toggle the menu on small screens when clicking on the menu button-->
-<!--function toggleFunction() {-->
-<!--    var x = document.getElementById("navDemo");-->
-<!--    if (x.className.indexOf("w3-show") == -1) {-->
-<!--        x.className += " w3-show";-->
-<!--    } else {-->
-<!--        x.className = x.className.replace(" w3-show", "");-->
-<!--    }-->
-<!--}-->
-<!---->
-<!--// scroll nav-bar-->
-<!--document.addEventListener('scroll', function(){-->
-<!--    var h = document.documentElement,-->
-<!--        b = document.body,-->
-<!--        st = 'scrollTop',-->
-<!--        sh = 'scrollHeight';-->
-<!---->
-<!--    var percent = (h[st]||b[st]) / ((h[sh]||b[sh]) - h.clientHeight) * 100;-->
-<!--	document.getElementById('scroll-bar').style.width = percent + '%';-->
-<!---->
-<!--});-->
-<!--</script>-->
-
 </body>
 </html>
