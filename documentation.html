@@ -1,0 +1,565 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Nenufaarity</title>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<meta name="description" content="Nenufaar + singularity = nenufaarity: container for fast, accurate and secure NGS analyses"/>
+		<meta name="keywords" content="NGS analysis, molecular diagnosis, DNA pipeline, singularity container, bioinformatics"/>
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<link type="img/gif" rel="icon" href="img/favicon.ico" />
+		<link href="style/w3.css" rel="stylesheet" type="text/css"/>
+		<link href="style/nenufaarity.css" rel="stylesheet" type="text/css"/>
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+		<script src="js/jquery-2.2.4.min.js" type="text/javascript"></script>
+		<script src="js/nenufaarity.js" type="text/javascript"></script>
+		<script src="js/documentation.js" type="text/javascript"></script>
+	</head>
+
+<body>
+	<nav class="w3-sidebar w3-bar-block w3-collapse w3-animate-left w3-card" style="z-index:3;width:250px;" id="mySidebar">
+		<a class="w3-bar-item w3-button w3-border-bottom w3-large w3-teal" href="index.html"><img src="img/nenu6.png" alt="nenufaar" class="w3-hide-medium w3-hide-small" style="height:1.7em"/> Nenufaarity</a>
+		<div id="scroll" class="w3-teal w3-top">
+		  <div id="scroll-bar" class="w3-white" style="height:4px;width:0%"></div>
+		</div>
+		<a class="w3-bar-item w3-button w3-hide-large w3-large" href="javascript:void(0)" onclick="w3_close()">Close <i class="fa fa-remove"></i></a>
+		<div id="toc"></div>
+	</nav>
+
+	<div class="w3-overlay w3-hide-large w3-animate-opacity" onclick="w3_close()" style="cursor:pointer" id="myOverlay"></div>
+
+	<div class="w3-main" style="margin-left:250px;">
+
+		<div class="w3-hide-large" id="padd"></div>
+		<div id="myTop" class="w3-container w3-top w3-teal w3-large">
+			<p class="w3-hide-large"><i class="fa fa-bars w3-button w3-xlarge" onclick="w3_open();"></i><span class="whereAmI">Nenufaarity</span></p>
+			<p id="myIntro" class="w3-hide w3-large w3-hide-small w3-hide-medium"><span class="whereAmI"></span></p>
+			<div id="scroll" class="w3-teal w3-top">
+			  <div id="scroll-bar" class="w3-blue" style="height:2px;width:0%"></div>
+			</div>
+		</div>
+
+		<header class="w3-container w3-theme bgimg-1 w3-opacity-min" style="padding:64px 32px" id="header">
+			<h1 class="w3-xxxlarge w3-wide w3-text-white">Nenufaarity</h1>
+		</header>
+
+		<div class="w3-container" style="padding:32px">
+			<h2 id="h2_what">What for?</h2>
+				<p><b>I have a bunch of fastq.gz files and I want BAMs and VCFs.</b></p><p>Two things to understand: <b>nenufaar is the actual DNA-NGS pipeline</b>, but as it requires many external software, we built <b>nenufaarity which is a container including nenufaar and all these software in a single file</b>. Which you will learn to use here. Meta nenufaar (mnenufaar) is also included in nenufaarity and is a way to run a sort of 'familiy mode' of nenufaar.</p>
+			<h2 id="h2_inst">Installation instruction</h2>
+				<h3 id="h3_reminder">Reminder: run command</h3>
+					<p>This section is a reminder. Read the rest of the doc before actually running nenufaarity.</p>
+					<div class="w3-code bash notranslate w3-light-gray">
+						singularity run --app nenufaar nenufaarity.simg -i input/my_run_folder/
+					</div>
+				<h3 id="h3_inst_sing">Install Singularity</h3>
+					<p>In order to run nenufaarity, you will first need to install <a href="http://singularity.lbl.gov/" title="Singularity Homepage">Singularity</a>.</p>
+					<p>Follow the instructions, depending on your OS :</p>
+					<ul>
+						<li>
+							<p><a href="http://singularity.lbl.gov/install-linux" title="Singularity installation instruction for Linux"><img width="32" alt="TuxFlat" src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/3c/TuxFlat.svg/32px-TuxFlat.svg.png"/> Linux</a></p>
+						</li>
+						<li>
+							<p><a href="http://singularity.lbl.gov/install-mac" title="Singularity installation instruction for Linux"><img width="32" alt="Apple-Apple" src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/df/Apple-Apple.svg/32px-Apple-Apple.svg.png"/> Mac</a></p>
+						</li>
+						<li>
+							<p><a href="http://singularity.lbl.gov/install-windows" title="Singularity installation instruction for Linux"><img width="32" alt="Windows logo - 2012" src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/5f/Windows_logo_-_2012.svg/32px-Windows_logo_-_2012.svg.png"/> Windows</a></p>
+						</li>
+					</ul>
+				<h3 id="h3_inst_nenuf">Install Nenufaarity</h3>
+					<p>There are two way to install Nenufaarity:</p>
+					<ol>
+						<li>The easy way (which includes all databases)</li>
+						<li>The less-easy way (where databases are manually installed)</li>
+					</ol>
+					<h4 id="h4_inst_ez">The easy way</h4>
+						<p>Download the full <a href="https://neuro-2.iurc.montp.inserm.fr/nenufaarity/downloads/full/nenufaarity.tar.gz">nenufaarity compressed archive</a> which is about 14.4 Gb
+						md5 checksum: 6ca0f2219b2f1ad33a14affdbb33785f</p>
+						<div class="w3-code bash notranslate w3-light-gray">
+							wget https://neuro-2.iurc.montp.inserm.fr/nenufaarity/downloads/full/nenufaarity.tar.gz<br>
+							tar -xzvf nenufaarity.tar.gz<br>
+							cd nenufaarity/
+						</div>
+					<h4 id="h4_inst_hard">The less-easy way</h4>
+						<p>Download the "empty" <a href="https://neuro-2.iurc.montp.inserm.fr/nenufaarity/downloads/empty/nenufaarity.tar.gz">nenufaarity compressed archive</a> which is about 700 Mb
+						md5 checksum: 9361f5e3f832a5171d1f05b8d9821db3</p>
+						<div class="w3-code bash notranslate w3-light-gray">
+							wget https://neuro-2.iurc.montp.inserm.fr/nenufaarity/downloads/empty/nenufaarity.tar.gz<br>
+							tar -xzvf nenufaarity.tar.gz<br>
+							cd nenufaarity/
+						</div>
+					<h4 id="h4_inst_diff">Differences between the two archives</h4>
+						<p>Since Nenufaarity is a container that runs a DNA-NGS pipeline, it requires several large files such as the genome in fasta format, a snp database, etc. The "empty" archive does not include these files, therefore in this case you will have to supply them by yourself.</p>
+						<p>Let's take a look at the content of the nenufaarity folder:</p>
+						<div class="w3-code bash notranslate w3-light-gray">
+							drwxr-xr-x. 5 mobidic mobidic 4.0K Oct 10 16:50 input<br>
+							-rw-r--r--. 1 mobidic mobidic 1012 Oct 25 16:06 mnenufaar.conf<br>
+							-rw-r--r--. 1 mobidic mobidic 3.2K Oct 10 16:21 nenufaar.conf<br>
+							-rwxr-xr-x. 1 root    root    549M Oct 25 16:32 nenufaarity.simg<br>
+							drwxr-xr-x. 7 mobidic mobidic 4.0K Oct 25 16:04 output<br>
+							-rw-r--r--. 1 mobidic mobidic  11K Oct 25 18:06 README.md<br>
+							drwxr-xr-x. 8 mobidic mobidic 4.0K Oct 10 16:43 refData<br>
+							drwxr-xr-x. 3 mobidic mobidic 4.0K Oct 11 18:27 tests
+						</div>
+						<p>We can see first the nenufaarity.simg which is the sungularity container you will invoke to run nenufaar.</p>
+						<p>Then you have several folders:</p>
+						<ul>
+							<li>
+								<p><span class="w3-code bash w3-light-gray">input/</span>: the folder that will contain your fastq.gz files (see the <a href="#h2_run">Run</a> section)</p>
+							</li>
+							<li>
+								<p><span class="w3-code bash w3-light-gray">output/</span>: the folder that will contain your results</p>
+							</li>
+							<li>
+								<p><span class="w3-code bash w3-light-gray">refData/</span>: the folder that contains or will contain the reference file (see <a href="#h3_add">Adding or changing reference files</a>)</p>
+							</li>
+							<li>
+								<p><span class="w3-code bash w3-light-gray">test/</span>: the folder that would contain results of tests you could make (see the <a href="#h2_interact">Interact with nenufaarity</a> section)</p>
+							</li>
+						</ul>
+						<p>And 2 conf files which you will have to modify if you chose the "empty" archive.</p>
+						<p>If you chose the full archive, you're done and you can go to the <a href="#run">run</a> section, otherwise, follow the next part's instructions.</p>
+				<h3 id="h3_add">Adding or changing reference files</h3>
+					<p>In order to run properly, nenufaar requires:</p>
+					<ol>
+						<li>A reference genome: Nenufaar accepts hg19 or hg38 or virtually any genome in fasta format, however they should be usable by GATK and BWA.</li>
+					</ol>
+					<p>Check <a href="https://gatkforums.broadinstitute.org/gatk/discussion/2798/howto-prepare-a-reference-for-use-with-bwa-and-gatk">this</a> page.</p>
+					<p>You will also find some files and some others you will need in the <a href="https://software.broadinstitute.org/gatk/download/bundle">GATK resource bundle</a>.</p>
+					<ol start="2">
+						<li>
+							<p>a dbSNP vcf, ideally bgzipped and indexed with tabix. If you don't know what I'm talking about, either google or download and use the full archive :).</p>
+						</li>
+						<li>
+							<p>an indel vcf reference</p>
+						</li>
+						<li>
+							<p>that's it. The 2 above resources can be found in the <a href="https://software.broadinstitute.org/gatk/download/bundle">GATK resource bundle</a>, for example.</p>
+						</li>
+					</ol>
+					<p>To summarize, here is a step-by-step command history that will download these resources and place them where nenufaar expects them to be (hg19).</p>
+					<p>If you change these places, you will have to modify the conf files, which however should be self-explanatory. Otherwise, email <a href = "mailto:davidDOTbauxATinsermDOTfr" onclick = "this.href=this.href.replace(/AT/,'&#64;').replace(/DOT/,'&#46;').replace(/DOT/,'&#46;');" title="email David">us</a>.</p>
+					<div class="w3-code bash notranslate w3-light-gray">
+						cd nenufaarity/refData/genome/hg19/<br>
+						wget ftp://gsapubftp-anonymous@ftp.broadinstitute.org/bundle/hg19/ucsc.hg19.fasta.gz<br>
+						gunzip ucsc.hg19.fasta.gz && mv ucsc.hg19.fasta hg19.fa<br>
+						wget ftp://gsapubftp-anonymous@ftp.broadinstitute.org/bundle/hg19/ucsc.hg19.fasta.fai.gz<br>
+						gunzip ucsc.hg19.fasta.fai.gz && mv ucsc.hg19.fasta.fai hg19.fa.fai<br>
+						wget ftp://gsapubftp-anonymous@ftp.broadinstitute.org/bundle/hg19/ucsc.hg19.dict.gz<br>
+						gunzip ucsc.hg19.dict.gz && mv ucsc.hg19.dict hg19.dict<br>
+						singularity exec nenufaarity.simg bwa index -a bwtsw hg19.fa<br>
+						cd ../../indelReference/hg19<br>
+						wget ftp://gsapubftp-anonymous@ftp.broadinstitute.org/bundle/hg19/1000G_phase1.indels.hg19.sites.vcf.gz<br>
+						wget ftp://gsapubftp-anonymous@ftp.broadinstitute.org/bundle/hg19/1000G_phase1.indels.hg19.sites.vcf.idx.gz<br>
+						gunzip 1000G_phase1.indels.hg19.sites.vcf.idx.gz<br>
+						wget ftp://gsapubftp-anonymous@ftp.broadinstitute.org/bundle/hg19/Mills_and_1000G_gold_standard.indels.hg19.sites.vcf.gz<br>
+						wget ftp://gsapubftp-anonymous@ftp.broadinstitute.org/bundle/hg19/Mills_and_1000G_gold_standard.indels.hg19.sites.vcf.idx.gz<br>
+						gunzip Mills_and_1000G_gold_standard.indels.hg19.sites.vcf.idx.gz<br>
+						cd ../../dbSNP/138/<br>
+						wget ftp://gsapubftp-anonymous@ftp.broadinstitute.org/bundle/hg19/dbsnp_138.hg19.vcf.gz<br>
+						wget ftp://gsapubftp-anonymous@ftp.broadinstitute.org/bundle/hg19/dbsnp_138.hg19.vcf.idx.gz<br>
+						gunzip dbsnp_138.hg19.vcf.idx.gz
+					</div>
+			<h2 id="h2_run">Run</h2>
+				<h3 id="h2_run_nenuf">Run nenufaar with nenufaarity</h3>
+					<p>All right, everything is ok, but you will have to know a few things before running nenufaar through nenufaarity.</p>
+					<h4 id="h4_run_nenuf_input">Input files</h4>
+						<p>Ideally, use the input folder; then create a run folder inside, then a folder per sample where you will place the compressed fastqs, e.g.</p>
+						<div class="w3-code bash notranslate w3-light-gray">
+							cd nenufaarity<br>
+							mkdir input/my_run_folder/<br>
+							cd input/my_run_folder/<br>
+							mkdir sample1 sample2 sample3...
+						</div>
+						<p>Then put sample1.R1.fastq.gz and sample1.R2.fastq.gz in sample1/, etc.</p>
+						<p>Finally, you MUST put in my_run_folder/ an interval file which corresponds to your regions of interest. This file must be named Intervals.list and must be compliant with the <a href="https://software.broadinstitute.org/gatk/documentation/article.php?id=1319">GATK format</a>:</p>
+						<p><code>chr1:1442544-1442695</code></p>
+						<p>One region per line (beware of the EOL markers! Should be \n).</p>
+						<p>Please note that nenufaarity will automatically convert the Intervals.list file into a bed file which you will find in the input/my_run_folder/ folder.</p>
+						<p>Optionally, you might want to add a <a href="https://broadinstitute.github.io/picard/">picard intervals file</a> if you want to run picard CollectHSMetrics.</p>
+						<p>To obtain you picard interval file, you can use <a href="http://broadinstitute.github.io/picard/command-line-overview.html#BedToIntervalList">this</a>, but you will need a BED file as input (see <a href="https://gist.github.com/beboche" target="_blank" title="awk one-liners for BED and GATK formats">here</a> to easily convert bed files to gatk format with awk and the other way around).</p>
+						<p>Anyway, you should name it Picard.intervals.list. If you have a picard bait file, name it Picard.baits.intervals.list. These files are expected to be placed in the my_run_folder/ folder.</p>
+					<h4 id="h4_run_nenuf_when">When will we run???</h4>
+						<p>Now:</p>
+						<div class="w3-code bash notranslate w3-light-gray">
+							singularity run --app nenufaar nenufaarity.simg -i input/my_run_folder/ -g hg19
+						</div>
+						<p>then wait. Nenufaarity will propose a tail command to follow your run.</p>
+						<p>but before you should check the “computer environment options” part of the nenufaar.conf file, especially the NB_THREAD and MAX_RAM values which corresponds to the number of threads you want to allocate to nenufaar and the maximum amount of RAM nenufaar is allowed to use.</p>
+					<h4 id="h4_run_nenuf_opt">Options</h4>
+						<p>The full archive is ready to run either in hg19 or hg38 mode. To run in hg38:</p>
+						<div class="w3-code bash notranslate w3-light-gray">
+							singularity run --app nenufaar nenufaarity.simg -i input/my_run_folder/ -g hg38
+						</div>
+						<p>If you chose the empty archive, you will need to add the same files you put for hg19, but in hg38, and check the conf files for actual path before running!</p>
+						<p>to run picard <a href="https://broadinstitute.github.io/picard/command-line-overview.html#CollectHsMetrics">CollectHSMetrics</a>, add -hsm true, e.g.</p>
+						<div class="w3-code bash notranslate w3-light-gray">
+							singularity run --app nenufaar nenufaarity.simg -i input/my_run_folder/ -g hg19 -hsm true
+						</div>
+						<p>to change output folder, use -o my_new_output_folder/ (must exists)</p>
+						<p>The -p options sets the protocol: values are</p>
+						<ul>
+							<li>capture (default)</li>
+						</ul>
+						<div class="w3-code bash notranslate w3-light-gray">
+							singularity run --app nenufaar nenufaarity.simg -i input/my_run_folder -g hg19 -p capture
+						</div>
+						<ul>
+							<li>amplicon (duplicates are not marked)</li>
+						</ul>
+						<div class="w3-code bash notranslate w3-light-gray">
+							singularity run --app nenufaar nenufaarity.simg -i input/my_run_folder -g hg19 -p amplicon
+						</div>
+						<ul>
+							<li>wgs (no base recalibration ; see the <a href="#h2_perf">Performance</a> section)</li>
+						</ul>
+						<div class="w3-code bash notranslate w3-light-gray">
+							singularity run --app nenufaar nenufaarity.simg -i input/my_run_folder -g hg19 -p wgs
+						</div>
+						<p>You can use GATK <a href="https://software.broadinstitute.org/gatk/documentation/tooldocs/current/org_broadinstitute_gatk_tools_walkers_genotyper_UnifiedGenotyper.php">UnifiedGenotyper</a> instead of <a href="https://software.broadinstitute.org/gatk/documentation/tooldocs/current/org_broadinstitute_gatk_tools_walkers_haplotypecaller_HaplotypeCaller.php">HaplotypeCaller</a> by setting the caller with the -c option. This might be useful if you run nenufaar on highly covered regions (>500X) as Haplotype caller is downsampled to 500X. In this case, also set the -dcov option.</p>
+						<ul>
+						<li>UnifiedGenotyper with downsampling to 20000X:</li>
+						</ul>
+						<div class="w3-code bash notranslate w3-light-gray">
+							singularity run --app nenufaar nenufaarity.simg -i input/my_run_folder -g hg19 -c ug -dcov 20000
+						</div>
+						<ul>
+						<li>HaplotypeCaller (default)</li>
+						</ul>
+						<div class="w3-code bash notranslate w3-light-gray">
+							singularity run --app nenufaar nenufaarity.simg -i input/my_run_folder -g hg19 -c hc
+						</div>
+						<p>Other options are detailed in nenufaar’s gitHub <a href="https://github.com/beboche/nenufaar">page</a>.</p>
+					<h4 id="h4_run_nenuf_out">Output files</h4>
+						<p>Your results will be available in the ouput/my_run_folder/ folder. If you don't like text files, you should run <a href="http://multiqc.info/" target="_blank">multiQC</a> on that folder to check the quality of your run:</p>
+						<div class="w3-code bash notranslate w3-light-gray">
+							multiqc output/my_run_folder/
+						</div>
+				<h3 id="h3_run_meta">Run Meta nenufaar with nenufaarity</h3>
+					<p>Meta nenufaar is a way to produce single BAMs and VCFs for a whole family (or population, but let's say a family).</p>
+					<p>Meta nenufaar (mnenufaar) is run through nenufaarity like this:</p>
+					<div class="w3-code bash notranslate w3-light-gray">
+						singularity run --app mnenufaar nenufaarity.simg -i input/my_run_folder/ -g hg19 -hsm true
+					</div>
+					<p>The input/my_run_folder/ folder must contain at least two samples.</p>
+					<p>Options are the same than for regular nenufaar.</p>
+				<h3 id="h3_run_hpc">Running on HPC environment</h3>
+					<p>If you want to run nenufaarity on a cluster, you need <a href="https://slurm.schedmd.com/">slurm</a>, <a href="http://singularity.lbl.gov/">singularity</a> and <a href="http://apps.man.poznan.pl/trac/slurm-drmaa/wiki">slurm-drmaa</a>.</p>
+					<p>Then you need to modify some values in the nenufaar.conf and/or in the mnenufaar.conf file:</p>
+					<ul>
+						<li>
+							<p>PARTITION with the name of the partition you use on slurm, e.g. 'defq'</p>
+						</li>
+						<li>
+							<p>SRUN_SIMPLE_COMMAND which should be set to a srun command which uses one core on one node, e.g.</p>
+						</li>
+					</ul>
+					<div class="w3-code bash notranslate w3-light-gray">
+						srun --job-name=${RUN_BASEDIR_NAME}_${ID} -N${NB_NODES} -n1 -c1 --partition=${PARTITION} --account=IURCyour_account --mem-per-cpu=12288
+					</div>
+					<ul>
+						<li>SRUN_24_COMMAND which is the variable which will be used to run the tools in parallel mode, e.g.</li>
+					</ul>
+					<div class="w3-code bash notranslate w3-light-gray">
+						srun --job-name=${RUN_BASEDIR_NAME}_${ID} -N${NB_NODES} -n1 -c${NB_THREAD} --partition=${PARTITION} --account=IURC
+					</div>
+					<p>(put NB_THREAD to whatever your cluster is capable of - please note that the NB_NODES option has never been tested with a value greater than 1)</p>
+					<ul>
+						<li>
+							<p>QUEUE_RUNNER should be '-jobRunner Drmaa'</p>
+						</li>
+						<li>
+							<p>Then last but not least, at the beginning of the conf file, you should set the LD_LIBRARY_PATH variable to the lib/ folder of slurm-frmaa, e.g.</p>
+						</li>
+					</ul>
+					<div class="w3-code bash notranslate w3-light-gray">
+						export LD_LIBRARY_PATH=/path/to/slurm-drmaa-version/lib/:${LD_LIBRARY_PATH}
+					</div>
+					<p>For the mnenufaar.conf file, you only need to set the SRUN_24_COMMAND, PARTITION and obvioulsy, NB_THREAD variables.</p>
+			<h2 id="h2_perf">Performance</h2>
+				<h3 id="h3_giab">Validation VS GiaB</h3>
+				<p>Nenufaar has been tested against <a href="https://www.nist.gov/programs-projects/genome-bottle" target="_blank">Genome in a Bottle</a> NA12878 with the GiaB bed file v2.19. below are presented the results obtained with <a href="https://www.realtimegenomics.com/products/rtg-tools" target="_blank">rtg-tools</a> eval comparing GiaB vcf as reference against nenufaar vcf:</p>
+				<div class="w3-responsive">
+					<table class="w3-table-all  w3-hoverable"><caption>Nenufaar VS GiaB</caption>
+						<tr>
+							<th>Threshold</th>
+							<th>True-pos-baseline</th>
+							<th>True-pos-call</th>
+							<th>False-pos</th>
+							<th>False-neg</th>
+							<th>Precision</th>
+							<th>Sensitivity</th>
+							<th>F-measure</th>
+						</tr>
+						<tr>
+							<td>42.000</td>
+							<td>2893425</td>
+							<td>2893560</td>
+							<td>149780</td>
+							<td>84985</td>
+							<td>0.9508</td>
+							<td>0.9715</td>
+							<td>0.9610</td>
+						</tr>
+						<tr>
+							<td>None</td>
+							<td>2895096</td>
+							<td>2895231</td>
+							<td>153015</td>
+							<td>83314</td>
+							<td>0.9498</td>
+							<td>0.9720</td>
+							<td>0.9608</td>
+						</tr>
+					</table>
+				</div>
+				<p><b>Specificity</b> has been computed to be 0.9986 on 2.2 Billion bp.</p>
+				<h3 id="h3_br">Base Recalibration for huge high quality runs</h3>
+				<p>As the Base racalibration (BR) part of the process is often the longest one, we assessed the behaviour of nenufaar with or without this part. We used the same sample NA12878 and ran the pipeline with and without the BR step. You can read <a href="https://gatkforums.broadinstitute.org/gatk/discussion/44/base-quality-score-recalibration-bqsr" target="_blank">here</a> why BR can be a useful tool. However, it's really long, even on a HPC and paralellized with queue. Therefore, if -wgs true, nenufaar will skip BR. However, if you want to keep BR, just let default -wgs false, e.g. if you have a low quality run. Anyway with NA12878 we found this (nenufaar with BR was the reference):</p>
+				<div class="w3-responsive">
+					<table class="w3-table-all  w3-hoverable"><caption>Nenufaar VS Nenufaar: Base Recalibration or not?</caption>
+						<tr>
+							<th>Threshold</th>
+							<th>True-pos-baseline</th>
+							<th>True-pos-call</th>
+							<th>False-pos</th>
+							<th>False-neg</th>
+							<th>Precision</th>
+							<th>Sensitivity</th>
+							<th>F-measure</th>
+						</tr>
+						<tr>
+							<td>2.000</td>
+							<td>3050516</td>
+							<td>3050516</td>
+							<td>3770</td>
+							<td>12660</td>
+							<td>0.9988</td>
+							<td>0.9959</td>
+							<td>0.9973</td>
+						</tr>
+						<tr>
+							<td>None</td>
+							<td>3050551</td>
+							<td>3050551</td>
+							<td>3808</td>
+							<td>12625</td>
+							<td>0.9988</td>
+							<td>0.9959</td>
+							<td>0.9973</td>
+						</tr>
+					</table>
+				</div>
+				<p>Which means that the results were highly comparable.</p>
+				<h3 id="h3_lgm">LGM usage</h3>
+				<p>Nenufaar is used in combination with other pipelines at the <a href="https://cftr.iurc.montp.inserm.fr/lgmr" target="_blank">Laboratory of Molecular Genetics</a> of Montpellier University Hospital (<a href="http://www.chu-montpellier.fr/" target="_blank">CHU Montpellier</a>) since 2015. It has analysed until now more than 500 samples, either using gene panels, clinical exomes or complete exomes. It has been developped in the <a href="https://neuro-2.iurc.montp.inserm.fr/usher" target="_blank">deafness and blindness group<a/>.</p>
+			<h2 id="h2_lim">Limitations</h2>
+				<p>Compared with regular <a href="https://github.com/beboche/nenufaar">nenufaar and metanenufaar</a>, nenufaarity lacks some functionalities, such as:</p>
+				<ol>
+					<li>
+						<p>the annotation module (nenufaar_annot.sh), too bad it's nice, but requires software with mandatory registration such as <a href="http://annovar.openbioinformatics.org/en/latest/">ANNOVAR</a>.</p>
+					</li>
+					<li>
+						<p>That's it.</p>
+					</li>
+				</ol>
+			<h2 id="h2_interact">Interact with nenufaarity</h2>
+				<p>You can interact with singularity containers such as nenufaarity in a more subtle way than just run it. The complete doc is available <a href="http://singularity.lbl.gov/docs-usage" target="_blank">here</a>. Some examples are shown below:</p>
+				<ul>
+					<li>
+						<p>Get help:</p>
+						<div class="w3-code bash notranslate w3-light-gray">
+							singularity help nenufaarity.simg<br/>
+							singularity help --app nenufaar nenufaarity.simg<br/>
+							singularity help --app mnenufaar nenufaarity.simg<br/>
+						</div>
+					</li>
+					<li>
+						<p>Run a shell inside the container:</p>
+						<div class="w3-code bash notranslate w3-light-gray">
+							singularity shell nenufaarity.simg
+						</div>
+					</li>
+					<li>
+						<p>Execute a specific command (e.g. use container's BWA to index you fasta genome):</p>
+						<div class="w3-code bash notranslate w3-light-gray">
+							singularity exec nenufaarity.simg bwa index -a bwtsw hg19.fa
+						</div>
+						<p>This latter is particularly interesting. As the container provides built-in versions of several software, you don't need to install them on your machine if you need them for other tasks, just run them through nenufaarity. Below is a list of available software installed in /usr/local/bin/:</p>
+						<ul>
+							<li><a href="http://www.bioinformatics.babraham.ac.uk/projects/fastqc/" target="_blank">FastQC</a></li>
+							<li><a href="http://bio-bwa.sourceforge.net/" target="_blank">BWA</a></li>
+							<li><a href="http://www.htslib.org/" target="_blank">HTSlib (bgzip, tabix)</a></li>
+							<li><a href="http://www.htslib.org/" target="_blank">Samtools</a></li>
+							<li><a href="https://lomereiter.github.io/sambamba/" target="_blank">Sambamba</a></li>
+							<li><a href="http://bedtools.readthedocs.io/en/latest/" target="_blank">BEDtools</a></li>
+							<li><a href="http://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html" target="_blank">Oracle's Java JDK 1.8</a></li>
+						</ul>
+						<p>The following jar files can be found in the container in /nenufaar/software/ (singularity exec nenufaarity ls /nenufaar/software/ to get te folder's name):</p>
+						<ul>
+							<li><a href="https://lindenb.github.io/jvarkit/VCFPolyX.html" target="_blank">Jvarkit VCFpolyx</a></li>
+							<li><a href="https://software.broadinstitute.org/gatk/" target="_blank">GATK 3.8</a></li>
+							<li><a href="https://software.broadinstitute.org/gatk/download/queue" target="_blank">Queue</a></li>
+							<li><a href="https://broadinstitute.github.io/picard/" target="_blank">Picard</a></li>
+						</ul>
+						<p>you can execute them for example for GATK via:</p>
+						<div class="w3-code bash notranslate w3-light-gray">
+							singularity exec nenufaarity.simg java -jar /nenufaar/software/GenomeAnalysisTK/3.8.0/GenomeAnalysisTK.jar
+						</div>
+						<p>Finally the last tool is python-based and also can be found in the container in /nenufaar/software/ (singularity exec nenufaarity ls /nenufaar/software/ to get the folder's name):</p>
+						<ul>
+							<li><a href="https://github.com/andyrimmer/Platypus" target="_blank">Platypus</a></li>
+							<!--<li><a href="https://github.com/RahmanTeam/CAVA" target="_blank">Cava</a></li>-->
+						</ul>
+						<p>To get the versions, just ask nenufaarity, e.g.:</p>
+						<div class="w3-code bash notranslate w3-light-gray">
+							singularity exec nenufaarity.simg python /nenufaar/software/Platypus/bin/Platypus.py
+						</div>
+					</li>
+				</ul>
+
+		</div>
+
+		<footer class="w3-container w3-light-gray">
+			<table style="border:none;width:100%;" class="w3-padding-64">
+		<tr style="width:100%;">
+			<td style="width:50%;" class="w3-center w3-padding-64">
+				<a href="https://neuro-2.iurc.montp.inserm.fr" title="go to MoBiDiC page" target="_blank" class="w3-hover-opacity" style="text-decoration: none;"><img src="img/mobi2.png" alt="MoBiDiC"/></a>
+			</td>
+			<!--<div class="w3-col s4 w3-container"></div>-->
+			<td style="width:50%;" class="w3-center w3-padding-64">
+				<p class="w3-xlarge w3-center"><a href="https://neuro-2.iurc.montp.inserm.fr" title="Visit MoBiDiC's page" target="_blank">The MoBiDiC team</a></p>
+				<p class="w3-center">Bioinformatics at <a href ="http://www.chu-montpellier.fr/" target="_blank" title="Visit the hospital page">Montpellier University Hospital</a><a href="https://github.com/mobidic" title="go to MoBiDiC git page" target="_blank" class="w3-hover-text-black w3-large" style="text-decoration: none;">
+						<i class="fa fa-github fa-fw"></i>
+					</a></p>
+				<!-- <p class="w3-large w3-margin-bottom">The  :</p> -->
+				<!--<div class="w3-col w3-center w3-large w3-margin-bottom">-->
+				<p>
+					Nenufaarity: David BAUX<a href="https://github.com/beboche" title="Visit David's GitHub page" target="_blank" class="w3-hover-text-black" style="text-decoration: none;">
+						<i class="fa fa-github fa-fw"></i>
+					</a><br/>
+					Web Design: Charles VAN GOETHEM<a href="https://github.com/char-al" title="Visit Charles' GitHub page" target="_blank" class="w3-hover-text-black" style="text-decoration: none;">
+						<i class="fa fa-github fa-fw"></i>
+					</a><br/>
+				</p>
+			</td>
+		</tr>
+	</table>
+		</footer>
+	</div>
+
+<!--		<script>
+			// Open and close the sidebar on medium and small screens
+			function w3_open() {
+			    document.getElementById("mySidebar").style.display = "block";
+			    document.getElementById("myOverlay").style.display = "block";
+			}
+			function w3_close() {
+			    document.getElementById("mySidebar").style.display = "none";
+			    document.getElementById("myOverlay").style.display = "none";
+			}
+
+			// Change style of top container on scroll
+			window.onscroll = function() {myFunction()};
+			function myFunction() {
+				var offsetHeight = document.getElementById('header').offsetHeight + 32;
+			    if (document.body.scrollTop > offsetHeight || document.documentElement.scrollTop > offsetHeight) {
+			        document.getElementById("myIntro").classList.add("w3-show-inline-block");
+			    } else {
+			        document.getElementById("myIntro").classList.remove("w3-show-inline-block");
+			    }
+
+			}
+			// On change of id
+			// TODO
+			var offsetHeight = document.getElementById('myTop').offsetHeight;
+			document.getElementById("padd").style.height = offsetHeight + "px";
+
+			// Accordions
+			function myAccordion(id) {
+			    var x = document.getElementById(id);
+			    if (x.className.indexOf("w3-show") == -1) {
+			        x.className += " w3-show";
+			        x.previousElementSibling.className += " w3-theme";
+			    } else {
+			        x.className = x.className.replace("w3-show", "");
+			        x.previousElementSibling.className =
+			        x.previousElementSibling.className.replace(" w3-theme", "");
+			    }
+			}
+
+
+
+
+
+			// jQuery `inView`-expression
+			$.extend($.expr[':'], {
+			    inView: function(el) {
+			        var width = $(el).width(),
+			            height = $(el).height(),
+			            offset = $(el).offset(),
+
+			            vp_dimensions = {
+			                height: $(window).height()-$(window).height()+10,
+			                width: $(window).width()
+			            },
+			            y_offset = (document.documentElement.scrollTop ? document.documentElement.scrollTop : document.body.scrollTop),
+			            x_offset = (document.documentElement.scrollLeft ? document.documentElement.scrollLeft : document.body.scrollLeft);
+
+			        return (
+			        offset.top < (y_offset + vp_dimensions.height) && offset.left < (x_offset + vp_dimensions.width) && (offset.top + height) > y_offset && (offset.left + width) > x_offset);
+			    }
+			});
+
+
+
+
+
+
+
+			// Change the titles on scroll
+			$(window).scroll(function() {
+
+			    $('h2, h3').each(function() {
+			        var self = $(this),
+			            title = self.text(),
+						current_id = self.prop("id");
+			        if (self.is(':inView')) {
+			            $('.whereAmI').text(title);
+						$(".myClassToc").removeClass('w3-teal');
+						$("#link_" + current_id).addClass('w3-teal');
+			        } else if (! $(window).scrollTop()) {
+						$(".myClassToc").removeClass('w3-teal');
+						//$(".h1Toc").addClass('w3-teal');
+			        }
+			    });
+
+			}).scroll();
+
+
+
+
+
+
+			$("h2, h3").each(function(i) {
+			    var current = $(this);
+			    // current.attr("id", "title" + i);
+			    $("#toc").append("<a class='w3-bar-item w3-button myClassToc' id='link_" + current.prop("id") + "' href='#" +
+			        current.prop("id") + "' title='" + current.prop("tagName") + "'>" +
+			        current.html() + "</a>");
+			});
+
+
+
+			document.addEventListener('scroll', function(){
+			    var h = document.documentElement,
+			        b = document.body,
+			        st = 'scrollTop',
+			        sh = 'scrollHeight';
+
+			    var percent = (h[st]||b[st]) / ((h[sh]||b[sh]) - h.clientHeight) * 100;
+				document.getElementById('scroll-bar').style.width = percent + '%';
+
+			});
+		</script>-->
+	</body>
+</html>
