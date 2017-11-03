@@ -47,12 +47,12 @@
 				<p><b>I have a bunch of fastq.gz files and I want BAMs and VCFs.</b></p><p>Two things to understand: <b>nenufaar is the actual DNA-NGS pipeline</b>, but as it requires many external software, we built <b>nenufaarity which is a container including nenufaar and all these software in a single file</b>. Which you will learn to use here. Meta nenufaar (mnenufaar) is also included in nenufaarity and is a way to run a sort of 'familiy mode' of nenufaar.</p>
 			<h2 id="h2_inst">Installation instruction</h2>
 				<h3 id="h3_reminder">Reminder: run command</h3>
-					<p>This section is a reminder. Read the rest of the doc before actually running nenufaarity.</p>
+					<p><b>This section is a reminder</b>. Read the rest of the doc before actually running nenufaarity.</p>
 					<div class="w3-code bash notranslate w3-light-gray">
 						singularity run --app nenufaar nenufaarity.simg -i input/my_run_folder/
 					</div>
 				<h3 id="h3_inst_sing">Install Singularity</h3>
-					<p>In order to run nenufaarity, you will first need to install <a href="http://singularity.lbl.gov/" title="Singularity Homepage">Singularity</a>.</p>
+					<p>In order to run nenufaarity, <b>you will first need to install <a href="http://singularity.lbl.gov/" title="Singularity Homepage">Singularity</a>.</b></p>
 					<p>Follow the instructions, depending on your OS :</p>
 					<ul>
 						<li>
@@ -66,29 +66,27 @@
 						</li>
 					</ul>
 				<h3 id="h3_inst_nenuf">Install Nenufaarity</h3>
-					<p>There are two way to install Nenufaarity:</p>
+					<p>There are two ways to install Nenufaarity:</p>
 					<ol>
 						<li>The easy way (which includes all databases)</li>
 						<li>The less-easy way (where databases are manually installed)</li>
 					</ol>
 					<h4 id="h4_inst_ez">The easy way</h4>
-						<p>Download the full <a href="https://neuro-2.iurc.montp.inserm.fr/nenufaarity/downloads/full/nenufaarity.tar.gz">nenufaarity compressed archive</a> which is about 14.4 Gb
-						md5 checksum: 6ca0f2219b2f1ad33a14affdbb33785f</p>
+						<p><b>Download the full <a href="index.html#download">nenufaarity compressed archive</a></b> which is about 14.4 Gb<br/>md5 checksum: 6ca0f2219b2f1ad33a14affdbb33785f</p>
 						<div class="w3-code bash notranslate w3-light-gray">
 							wget https://neuro-2.iurc.montp.inserm.fr/nenufaarity/downloads/full/nenufaarity.tar.gz<br>
 							tar -xzvf nenufaarity.tar.gz<br>
 							cd nenufaarity/
 						</div>
 					<h4 id="h4_inst_hard">The less-easy way</h4>
-						<p>Download the "empty" <a href="https://neuro-2.iurc.montp.inserm.fr/nenufaarity/downloads/empty/nenufaarity.tar.gz">nenufaarity compressed archive</a> which is about 700 Mb
-						md5 checksum: 9361f5e3f832a5171d1f05b8d9821db3</p>
+						<p><b>Download the empty <a href="index.html#download">nenufaarity compressed archive</a></b> which is about 700 Mb<br/>md5 checksum: 9361f5e3f832a5171d1f05b8d9821db3</p>
 						<div class="w3-code bash notranslate w3-light-gray">
 							wget https://neuro-2.iurc.montp.inserm.fr/nenufaarity/downloads/empty/nenufaarity.tar.gz<br>
 							tar -xzvf nenufaarity.tar.gz<br>
 							cd nenufaarity/
 						</div>
 					<h4 id="h4_inst_diff">Differences between the two archives</h4>
-						<p>Since Nenufaarity is a container that runs a DNA-NGS pipeline, it requires several large files such as the genome in fasta format, a snp database, etc. The "empty" archive does not include these files, therefore in this case you will have to supply them by yourself.</p>
+						<p>Since Nenufaarity is a container that runs a DNA-NGS pipeline, <b>it requires several large files</b> such as the genome in fasta format, a snp database, etc. <b>The empty archive does not include these files</b>, therefore in this case you will have to supply them by yourself.</p>
 						<p>Let's take a look at the content of the nenufaarity folder:</p>
 						<div class="w3-code bash notranslate w3-light-gray">
 							drwxr-xr-x. 5 mobidic mobidic 4.0K Oct 10 16:50 input<br>
@@ -100,37 +98,37 @@
 							drwxr-xr-x. 8 mobidic mobidic 4.0K Oct 10 16:43 refData<br>
 							drwxr-xr-x. 3 mobidic mobidic 4.0K Oct 11 18:27 tests
 						</div>
-						<p>We can see first the nenufaarity.simg which is the sungularity container you will invoke to run nenufaar.</p>
+						<p>We can see first <b>the nenufaarity.simg file which is the sungularity container you will invoke</b> to run nenufaar.</p>
 						<p>Then you have several folders:</p>
 						<ul>
 							<li>
-								<p><span class="w3-code bash w3-light-gray">input/</span>: the folder that will contain your fastq.gz files (see the <a href="#h2_run">Run</a> section)</p>
+								<p><span class="w3-code bash w3-light-gray">input/</span>: the <b>folder that will contain your fastq.gz</b> files (see the <a href="#h2_run">Run</a> section)</p>
 							</li>
 							<li>
-								<p><span class="w3-code bash w3-light-gray">output/</span>: the folder that will contain your results</p>
+								<p><span class="w3-code bash w3-light-gray">output/</span>: the folder that will contain <b>your results</b></p>
 							</li>
 							<li>
-								<p><span class="w3-code bash w3-light-gray">refData/</span>: the folder that contains or will contain the reference file (see <a href="#h3_add">Adding or changing reference files</a>)</p>
+								<p><span class="w3-code bash w3-light-gray">refData/</span>: the folder that contains or will contain <b>the reference files</b> (see <a href="#h3_add">Adding or changing reference files</a>)</p>
 							</li>
 							<li>
 								<p><span class="w3-code bash w3-light-gray">test/</span>: the folder that would contain results of tests you could make (see the <a href="#h2_interact">Interact with nenufaarity</a> section)</p>
 							</li>
 						</ul>
 						<p>And 2 conf files which you will have to modify if you chose the "empty" archive.</p>
-						<p>If you chose the full archive, you're done and you can go to the <a href="#run">run</a> section, otherwise, follow the next part's instructions.</p>
+						<p><b>If you chose the full archive, you're done and you can go to the <a href="#run">run</a> section</b>, otherwise, follow the next part's instructions.</p>
 				<h3 id="h3_add">Adding or changing reference files</h3>
 					<p>In order to run properly, nenufaar requires:</p>
 					<ol>
-						<li>A reference genome: Nenufaar accepts hg19 or hg38 or virtually any genome in fasta format, however they should be usable by GATK and BWA.</li>
+						<li><b>A reference genome</b>: Nenufaar accepts hg19 or hg38 or virtually any genome in fasta format, however they should be usable by GATK and BWA.</li>
 					</ol>
 					<p>Check <a href="https://gatkforums.broadinstitute.org/gatk/discussion/2798/howto-prepare-a-reference-for-use-with-bwa-and-gatk">this</a> page.</p>
 					<p>You will also find some files and some others you will need in the <a href="https://software.broadinstitute.org/gatk/download/bundle">GATK resource bundle</a>.</p>
 					<ol start="2">
 						<li>
-							<p>a dbSNP vcf, ideally bgzipped and indexed with tabix. If you don't know what I'm talking about, either google or download and use the full archive :).</p>
+							<p><b>a dbSNP vcf</b>, ideally bgzipped and indexed with tabix. If you don't know what I'm talking about, either google or download and use the full archive :).</p>
 						</li>
 						<li>
-							<p>an indel vcf reference</p>
+							<p><b>an indel vcf reference</b></p>
 						</li>
 						<li>
 							<p>that's it. The 2 above resources can be found in the <a href="https://software.broadinstitute.org/gatk/download/bundle">GATK resource bundle</a>, for example.</p>
@@ -416,7 +414,7 @@
 					</div>
 				</li>
 			</ul>
-			<h2 id="h2_interact">Use Singularity hub</h2>
+			<h2 id="h2_shub">Use Singularity hub</h2>
 			<p>nenufaarity is also at <a href="https://www.singularity-hub.org" target="_blank" title="Visit singularity Hub">Singularity Hub</a>!</p>
 			<p>You will find singularity commands to build, interact, pull and run Nenufaarity through Singularity Hub <a href="https://www.singularity-hub.org/collections/189/usage" target="_blank" title="Visit Nenufaarity @ Singularity Hub">here</a>.</p>
 
