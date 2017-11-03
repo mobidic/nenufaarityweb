@@ -9,6 +9,13 @@ function toggleFunction() {
     }
 }
 
+function agreementModal(link, color) {
+	document.getElementById('user_agreement_checkbox').checked=false;
+	document.getElementById('download_link').value=link;
+	document.getElementById('agreement_header').setAttribute('Class', 'w3-container w3-'+color);
+	document.getElementById('user_agreement').style.display='block';
+}
+
 $(window).load(function(){
 	// scroll nav-bar
 	document.addEventListener('scroll', function(){
