@@ -17,7 +17,7 @@
 
 <body>
 	<nav class="w3-sidebar w3-bar-block w3-collapse w3-animate-left w3-card" style="z-index:3;width:250px;" id="mySidebar">
-		<a class="w3-bar-item w3-button w3-border-bottom w3-large w3-teal" href="index.html"><img src="img/nenu6.png" alt="nenufaar" class="w3-hide-medium w3-hide-small" style="height:1.7em"/> Nenufaarity</a>
+		<a class="w3-bar-item w3-button w3-border-bottom w3-large w3-teal" href="index.html"><img src="img/logo-nenufaar.png" alt="nenufaar" class="w3-hide-medium w3-hide-small" style="height:1.7em"/> Nenufaarity</a>
 		<div id="scroll" class="w3-teal w3-top">
 		  <div id="scroll-bar" class="w3-white" style="height:4px;width:0%"></div>
 		</div>
@@ -52,17 +52,17 @@
 						singularity run --app nenufaar nenufaarity.simg -i input/my_run_folder/
 					</div>
 				<h3 id="h3_inst_sing">Install Singularity</h3>
-					<p>In order to run nenufaarity, <b>you will first need to install <a href="http://singularity.lbl.gov/" title="Singularity Homepage">Singularity</a>.</b></p>
+					<p>In order to run nenufaarity, <b>you will first need to install <a href="http://singularity.lbl.gov/"  target="_blank" title="Singularity Homepage">Singularity</a>.</b></p>
 					<p>Follow the instructions, depending on your OS :</p>
 					<ul>
 						<li>
-							<p><a href="http://singularity.lbl.gov/install-linux" title="Singularity installation instruction for Linux"><img width="32" alt="TuxFlat" src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/3c/TuxFlat.svg/32px-TuxFlat.svg.png"/> Linux</a></p>
+							<p><a href="http://singularity.lbl.gov/install-linux" target="_blank" title="Singularity installation instruction for Linux"><img width="32" alt="TuxFlat" src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/3c/TuxFlat.svg/32px-TuxFlat.svg.png"/> Linux</a></p>
 						</li>
 						<li>
-							<p><a href="http://singularity.lbl.gov/install-mac" title="Singularity installation instruction for Linux"><img width="32" alt="Apple-Apple" src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/df/Apple-Apple.svg/32px-Apple-Apple.svg.png"/> Mac</a></p>
+							<p><a href="http://singularity.lbl.gov/install-mac" target="_blank" title="Singularity installation instruction for Linux"><img width="32" alt="Apple-Apple" src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/df/Apple-Apple.svg/32px-Apple-Apple.svg.png"/> Mac</a></p>
 						</li>
 						<li>
-							<p><a href="http://singularity.lbl.gov/install-windows" title="Singularity installation instruction for Linux"><img width="32" alt="Windows logo - 2012" src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/5f/Windows_logo_-_2012.svg/32px-Windows_logo_-_2012.svg.png"/> Windows</a></p>
+							<p><a href="http://singularity.lbl.gov/install-windows" target="_blank" title="Singularity installation instruction for Linux"><img width="32" alt="Windows logo - 2012" src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/5f/Windows_logo_-_2012.svg/32px-Windows_logo_-_2012.svg.png"/> Windows</a></p>
 						</li>
 					</ul>
 				<h3 id="h3_inst_nenuf">Install Nenufaarity</h3>
@@ -121,8 +121,8 @@
 					<ol>
 						<li><b>A reference genome</b>: Nenufaar accepts hg19 or hg38 or virtually any genome in fasta format, however they should be usable by GATK and BWA.</li>
 					</ol>
-					<p>Check <a href="https://gatkforums.broadinstitute.org/gatk/discussion/2798/howto-prepare-a-reference-for-use-with-bwa-and-gatk">this</a> page.</p>
-					<p>You will also find some files and some others you will need in the <a href="https://software.broadinstitute.org/gatk/download/bundle">GATK resource bundle</a>.</p>
+					<p>Check <a href="https://gatkforums.broadinstitute.org/gatk/discussion/2798/howto-prepare-a-reference-for-use-with-bwa-and-gatk" target="_blank">this</a> page.</p>
+					<p>You will also find some files and some others you will need in the <a href="https://software.broadinstitute.org/gatk/download/bundle" target="_blank">GATK resource bundle</a>.</p>
 					<ol start="2">
 						<li>
 							<p><b>a dbSNP vcf</b>, ideally bgzipped and indexed with tabix. If you don't know what I'm talking about, either google or download and use the full archive :).</p>
@@ -131,7 +131,7 @@
 							<p><b>an indel vcf reference</b></p>
 						</li>
 						<li>
-							<p>that's it. The 2 above resources can be found in the <a href="https://software.broadinstitute.org/gatk/download/bundle">GATK resource bundle</a>, for example.</p>
+							<p>that's it. The 2 above resources can be found in the <a href="https://software.broadinstitute.org/gatk/download/bundle" target="_blank">GATK resource bundle</a>, for example.</p>
 						</li>
 					</ol>
 					<p>To summarize, here is a step-by-step command history that will download these resources and place them where nenufaar expects them to be (hg19).</p>
@@ -169,12 +169,12 @@
 							mkdir sample1 sample2 sample3...
 						</div>
 						<p>Then put sample1.R1.fastq.gz and sample1.R2.fastq.gz in sample1/, etc.</p>
-						<p>Finally, you MUST put in my_run_folder/ an interval file which corresponds to your regions of interest. This file must be named Intervals.list and must be compliant with the <a href="https://software.broadinstitute.org/gatk/documentation/article.php?id=1319">GATK format</a>:</p>
+						<p>Finally, you MUST put in my_run_folder/ an interval file which corresponds to your regions of interest. This file must be named Intervals.list and must be compliant with the <a href="https://software.broadinstitute.org/gatk/documentation/article.php?id=1319" target="_blank">GATK format</a>:</p>
 						<p><code>chr1:1442544-1442695</code></p>
 						<p>One region per line (beware of the EOL markers! Should be \n).</p>
 						<p>Please note that nenufaarity will automatically convert the Intervals.list file into a bed file which you will find in the input/my_run_folder/ folder.</p>
-						<p>Optionally, you might want to add a <a href="https://broadinstitute.github.io/picard/">picard intervals file</a> if you want to run picard CollectHSMetrics.</p>
-						<p>To obtain you picard interval file, you can use <a href="http://broadinstitute.github.io/picard/command-line-overview.html#BedToIntervalList">this</a>, but you will need a BED file as input (see <a href="https://gist.github.com/beboche" target="_blank" title="awk one-liners for BED and GATK formats">here</a> to easily convert bed files to gatk format with awk and the other way around).</p>
+						<p>Optionally, you might want to add a <a href="https://broadinstitute.github.io/picard/" target="_blank">picard intervals file</a> if you want to run picard CollectHSMetrics.</p>
+						<p>To obtain you picard interval file, you can use <a href="http://broadinstitute.github.io/picard/command-line-overview.html#BedToIntervalList" target="_blank">this</a>, but you will need a BED file as input (see <a href="https://gist.github.com/beboche" target="_blank" title="awk one-liners for BED and GATK formats">here</a> to easily convert bed files to gatk format with awk and the other way around).</p>
 						<p>Anyway, you should name it Picard.intervals.list. If you have a picard bait file, name it Picard.baits.intervals.list. These files are expected to be placed in the my_run_folder/ folder.</p>
 					<h4 id="h4_run_nenuf_when">When will we run???</h4>
 						<p>Now:</p>
@@ -189,7 +189,7 @@
 							singularity run --app nenufaar nenufaarity.simg -i input/my_run_folder/ -g hg38
 						</div>
 						<p>If you chose the empty archive, you will need to add the same files you put for hg19, but in hg38, and check the conf files for actual path before running!</p>
-						<p>to run picard <a href="https://broadinstitute.github.io/picard/command-line-overview.html#CollectHsMetrics">CollectHSMetrics</a>, add -hsm true, e.g.</p>
+						<p>to run picard <a href="https://broadinstitute.github.io/picard/command-line-overview.html#CollectHsMetrics" target="_blank">CollectHSMetrics</a>, add -hsm true, e.g.</p>
 						<div class="w3-code bash notranslate w3-light-gray">
 							singularity run --app nenufaar nenufaarity.simg -i input/my_run_folder/ -g hg19 -hsm true
 						</div>
@@ -213,7 +213,7 @@
 						<div class="w3-code bash notranslate w3-light-gray">
 							singularity run --app nenufaar nenufaarity.simg -i input/my_run_folder -g hg19 -p wgs
 						</div>
-						<p>You can use GATK <a href="https://software.broadinstitute.org/gatk/documentation/tooldocs/current/org_broadinstitute_gatk_tools_walkers_genotyper_UnifiedGenotyper.php">UnifiedGenotyper</a> instead of <a href="https://software.broadinstitute.org/gatk/documentation/tooldocs/current/org_broadinstitute_gatk_tools_walkers_haplotypecaller_HaplotypeCaller.php">HaplotypeCaller</a> by setting the caller with the -c option. This might be useful if you run nenufaar on highly covered regions (>500X) as Haplotype caller is downsampled to 500X. In this case, also set the -dcov option.</p>
+						<p>You can use GATK <a href="https://software.broadinstitute.org/gatk/documentation/tooldocs/current/org_broadinstitute_gatk_tools_walkers_genotyper_UnifiedGenotyper.php" target="_blank">UnifiedGenotyper</a> instead of <a href="https://software.broadinstitute.org/gatk/documentation/tooldocs/current/org_broadinstitute_gatk_tools_walkers_haplotypecaller_HaplotypeCaller.php" target="_blank">HaplotypeCaller</a> by setting the caller with the -c option. This might be useful if you run nenufaar on highly covered regions (>500X) as Haplotype caller is downsampled to 500X. In this case, also set the -dcov option.</p>
 						<ul>
 						<li>UnifiedGenotyper with downsampling to 20000X:</li>
 						</ul>
@@ -226,7 +226,7 @@
 						<div class="w3-code bash notranslate w3-light-gray">
 							singularity run --app nenufaar nenufaarity.simg -i input/my_run_folder -g hg19 -c hc
 						</div>
-						<p>Other options are detailed in nenufaar’s gitHub <a href="https://github.com/beboche/nenufaar">page</a>.</p>
+						<p>Other options are detailed in nenufaar’s gitHub <a href="https://github.com/beboche/nenufaar" target="_blank">page</a>.</p>
 					<h4 id="h4_run_nenuf_out">Output files</h4>
 						<p>Your results will be available in the ouput/my_run_folder/ folder. If you don't like text files, you should run <a href="http://multiqc.info/" target="_blank">multiQC</a> on that folder to check the quality of your run:</p>
 						<div class="w3-code bash notranslate w3-light-gray">
@@ -241,7 +241,7 @@
 					<p>The input/my_run_folder/ folder must contain at least two samples.</p>
 					<p>Options are the same than for regular nenufaar.</p>
 				<h3 id="h3_run_hpc">Running on HPC environment</h3>
-					<p>If you want to run nenufaarity on a cluster, you need <a href="https://slurm.schedmd.com/">slurm</a>, <a href="http://singularity.lbl.gov/">singularity</a> and <a href="http://apps.man.poznan.pl/trac/slurm-drmaa/wiki">slurm-drmaa</a>.</p>
+					<p>If you want to run nenufaarity on a cluster, you need <a href="https://slurm.schedmd.com/" target="_blank">slurm</a>, <a href="http://singularity.lbl.gov/" target="_blank">singularity</a> and <a href="http://apps.man.poznan.pl/trac/slurm-drmaa/wiki" target="_blank">slurm-drmaa</a>.</p>
 					<p>Then you need to modify some values in the nenufaar.conf and/or in the mnenufaar.conf file:</p>
 					<ul>
 						<li>
@@ -351,10 +351,10 @@
 				<h3 id="h3_lgm">LGM usage</h3>
 				<p>Nenufaar is used in combination with other pipelines at the <a href="https://cftr.iurc.montp.inserm.fr/lgmr" target="_blank">Laboratory of Molecular Genetics</a> of Montpellier University Hospital (<a href="http://www.chu-montpellier.fr/" target="_blank">CHU Montpellier</a>) since 2015. It has analysed until now more than 500 samples, either using gene panels, clinical exomes or complete exomes. It has been developped in the <a href="https://neuro-2.iurc.montp.inserm.fr/usher" target="_blank">deafness and blindness group<a/>.</p>
 			<h2 id="h2_lim">Limitations</h2>
-				<p>Compared with regular <a href="https://github.com/beboche/nenufaar">nenufaar and metanenufaar</a>, nenufaarity lacks some functionalities, such as:</p>
+				<p>Compared with regular <a href="https://github.com/beboche/nenufaar" target="_blank">nenufaar and metanenufaar</a>, nenufaarity lacks some functionalities, such as:</p>
 				<ol>
 					<li>
-						<p>the annotation module (nenufaar_annot.sh), too bad it's nice, but requires software with mandatory registration such as <a href="http://annovar.openbioinformatics.org/en/latest/">ANNOVAR</a>.</p>
+						<p>the annotation module (nenufaar_annot.sh), too bad it's nice, but requires software with mandatory registration such as <a href="http://annovar.openbioinformatics.org/en/latest/" target="_blank">ANNOVAR</a>.</p>
 					</li>
 					<li>
 						<p>That's it.</p>
